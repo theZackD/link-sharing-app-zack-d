@@ -1,0 +1,40 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap');
+
+body {
+    font-family: 'Instrument Sans', sans-serif;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    min-height: 60vh;
+    min-width: 450px;
+    width: 35vw;
+}
+
+.head {
+    display: grid;
+    height: 10vmin;
+    place-items: center;
+    margin-bottom: 5%;
+}
+
+.Log-container {
+    display: flex;
+    flex-direction: column;
+    background-color: aqua;
+    min-height: 50vmin;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 5%;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    
+
+}
