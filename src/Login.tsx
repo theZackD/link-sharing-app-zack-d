@@ -1,9 +1,11 @@
 import LogoLarge from './assets/images/logo-devlinks-large.svg'
-import EmailIcon from './assets/images/icon-email.svg'
+// import EmailIcon from './assets/images/icon-email.svg'
+import { Link } from 'react-router-dom'
+
 import './Login.css'
 import './components.css'
 
-const Login = () => {
+const Login : React.FC = () => {
   return (
     <div className='container'>
         <div className='head'>
@@ -19,9 +21,9 @@ const Login = () => {
               <input type="text" name='Email' placeholder={`e.g.: alex@email.com`} />
               <label htmlFor="Password">Password</label>
               <input type="text" name='Password' placeholder='Enter your password' />
-              <button>Login</button>
+              <button type='submit'>Login</button>
           </form>
-          <p id='createacc'>Don't have an account ? <a href="">Create an account</a></p>
+          <p id='createacc'>Don't have an account ? <Link to='/signup' >Create an account</Link></p>
         </div>
     </div>
   )
