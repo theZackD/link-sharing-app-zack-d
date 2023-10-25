@@ -9,7 +9,7 @@ body {
 .container {
     display: flex;
     flex-direction: column;
-    background-color: red;
+    background-color: #FAFAFA;
     min-height: 60vh;
     min-width: 450px;
     width: 35vw;
@@ -19,13 +19,14 @@ body {
     display: grid;
     height: 10vmin;
     place-items: center;
-    margin-bottom: 5%;
+    margin-bottom: 10%;
+
 }
 
 .Log-container {
     display: flex;
     flex-direction: column;
-    background-color: aqua;
+    background-color: white;
     min-height: 50vmin;
     border-radius: 10px;
     box-sizing: border-box;
@@ -35,6 +36,9 @@ body {
 form {
     display: flex;
     flex-direction: column;
-    
+    align-items: center;
+}
 
+#createacc {
+    text-align: center;
 }
