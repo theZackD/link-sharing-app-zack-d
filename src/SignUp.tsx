@@ -3,6 +3,12 @@ import './components.css'
 import LogoLarge from './assets/images/logo-devlinks-large.svg'
 import { Link } from 'react-router-dom'
 
+
+const linkStyle = {
+  textDecoration: "none",
+  color: '#633CFF'
+};
+
 const SignUp = () => {
   return (
     <div className='container'>
@@ -24,7 +30,7 @@ const SignUp = () => {
                 <p id='charinfo'>Password must contain at least 8 characters</p>
                 <button type='submit'>Login</button>
           </form>
-          <p id='createacc'>Already have an account ? <Link to='/'>Login</Link></p>
+          <p id='createacc'>Already have an account ? <Link to='/' style={linkStyle}>Login</Link></p>
         </div>
     </div>
   )

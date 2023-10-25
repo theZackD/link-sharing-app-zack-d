@@ -5,6 +5,11 @@ import { Link } from 'react-router-dom'
 import './Login.css'
 import './components.css'
 
+const linkStyle = {
+  textDecoration: "none",
+  color: '#633CFF'
+};
+
 const Login : React.FC = () => {
   return (
     <div className='container'>
@@ -23,7 +28,7 @@ const Login : React.FC = () => {
               <input type="text" name='Password' placeholder='Enter your password' />
               <button type='submit'>Login</button>
           </form>
-          <p id='createacc'>Don't have an account ? <Link to='/signup' >Create an account</Link></p>
+          <p id='createacc'>Don't have an account ? <Link to='/signup' style={linkStyle}>Create an account</Link></p>
         </div>
     </div>
   )
