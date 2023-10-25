@@ -23,9 +23,9 @@ const Login : React.FC = () => {
           </div>
           <form action="#">
               <label htmlFor="Email">Email address</label>
-              <input type="text" name='Email' placeholder={`e.g.: alex@email.com`} />
+              <input className='email' type="text" name='Email' placeholder={`e.g.: alex@email.com`} />
               <label htmlFor="Password">Password</label>
-              <input type="text" name='Password' placeholder='Enter your password' />
+              <input className='password' type="text" name='Password' placeholder='Enter your password' />
               <button type='submit'>Login</button>
           </form>
           <p id='createacc'>Don't have an account ? <Link to='/signup' style={linkStyle}>Create an account</Link></p>

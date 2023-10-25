@@ -22,12 +22,12 @@ const SignUp = () => {
           </div>
           <form action="#">
                 <label htmlFor="Email">Email address</label>
-                <input type="text" name='Email' placeholder={`e.g.: alex@email.com`} />
+                <input className='email' type="text" name='Email' placeholder={`e.g.: alex@email.com`} />
                 <label htmlFor="Password">Password</label>
-                <input type="text" name='Password' placeholder='At least 8 characters' />
+                <input className='password' type="text" name='Password' placeholder='At least 8 characters' />
                 <label htmlFor="Password">Confirm password</label>
-                <input type="text" name='Password' placeholder='At least 8 characters' />
-                <p id='charinfo'>Password must contain at least 8 characters</p>
+                <input className='password' type="text" name='Password' placeholder='At least 8 characters' />
+                <p  id='charinfo'>Password must contain at least 8 characters</p>
                 <button type='submit'>Login</button>
           </form>
           <p id='createacc'>Already have an account ? <Link to='/' style={linkStyle}>Login</Link></p>
