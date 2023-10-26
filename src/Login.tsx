@@ -1,9 +1,11 @@
 import LogoLarge from './assets/images/logo-devlinks-large.svg'
 // import EmailIcon from './assets/images/icon-email.svg'
 import { Link } from 'react-router-dom'
+import React from 'react'
 
 import './Login.css'
 import './components.css'
+import { useRef } from 'react';
 
 const linkStyle = {
   textDecoration: "none",
@@ -11,6 +13,10 @@ const linkStyle = {
 };
 
 const Login : React.FC = () => {
+
+  const emailRef = useRef<HTMLInputElement>(null)
+  const passRef = useRef<HTMLInputElement>(null)
+
   return (
     <div className='container'>
         <div className='head'>
@@ -23,9 +29,9 @@ const Login : React.FC = () => {
           </div>
           <form action="#">
               <label htmlFor="Email">Email address</label>
-              <input className='email' type="text" name='Email' placeholder={`e.g.: alex@email.com`} />
+              <input className='email' type="text" name='Email' placeholder={`e.g.: alex@email.com`} ref={emailRef} />
               <label htmlFor="Password">Password</label>
-              <input className='password' type="text" name='Password' placeholder='Enter your password' />
+              <input className='password' type="text" name='Password' placeholder={'Enter your password'} ref={passRef} />
               <button type='submit'>Login</button>
           </form>
           <p id='createacc'>Don't have an account ? <Link to='/signup' style={linkStyle}>Create an account</Link></p>
