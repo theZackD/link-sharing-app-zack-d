@@ -1,7 +1,7 @@
 import './SignUp.css'
 import './components.css'
 import LogoLarge from './assets/images/Temp-logo-large.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react';
 import { useAuth } from './AuthContext';
 
@@ -16,11 +16,13 @@ const SignUp = () => {
   const emailRef = useRef<HTMLInputElement>(null)
   const passRef = useRef<HTMLInputElement>(null)
   const passConfRef = useRef<HTMLInputElement>(null)
-  const { signup } = useAuth()
+  const { signup, logout } = useAuth()
   const [error, setError] = useState<string>('')
   const [emailError, setEmailError] = useState<string>('')
   const [passError, setPassError] = useState<string>('')
   const [passConfError, setPassConfError] = useState<string>('')
+
+  const navigate = useNavigate()
 
   const [loading, setLoading] = useState<boolean>(false)
 
@@ -52,6 +54,8 @@ const SignUp = () => {
       setPassConfError('')
       setLoading(true)
       await signup(emailRef.current?.value, passRef.current?.value)
+      await logout()
+      navigate('/login')
     } catch {
       setError('Signup failed')
     }

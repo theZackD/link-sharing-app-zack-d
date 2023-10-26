@@ -1,6 +1,6 @@
 import LogoLarge from './assets/images/Temp-logo-large.svg'
 // import EmailIcon from './assets/images/icon-email.svg'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import React, {useState} from 'react'
 import { useAuth } from './AuthContext'
 
@@ -18,11 +18,13 @@ const Login : React.FC = () => {
   const emailRef = useRef<HTMLInputElement>(null)
   const passRef = useRef<HTMLInputElement>(null)
 
-  const { login } = useAuth()
+  const { login, currentUser } = useAuth()
   const [error, setError] = useState<string>('')
   const [emailError, setEmailError] = useState<string>('')
   const [passError, setPassError] = useState<string>('')
   const [loading, setLoading] = useState<boolean>(false)
+
+  const navigate = useNavigate()
 
   async function handleSubmit(e : React.FormEvent<HTMLFormElement>){
     e.preventDefault()
@@ -45,6 +47,8 @@ const Login : React.FC = () => {
       setError('')
       setLoading(true)
       await login(emailRef.current?.value, passRef.current?.value)
+      navigate('/dashboard')
+
     } catch {
       setError('Failed to sign in')
     }
@@ -60,6 +64,7 @@ const Login : React.FC = () => {
         <div className="Log-container">
           <div className='title'>
               <h2>Login</h2>
+              <p> {currentUser && currentUser.email} </p>
               <p id='description'>Add your details below to get back into the app</p>
           </div>
           <form action="#" onSubmit={handleSubmit}>
