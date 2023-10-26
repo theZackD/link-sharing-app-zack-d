@@ -1,6 +1,6 @@
 import './SignUp.css'
 import './components.css'
-import LogoLarge from './assets/images/logo-devlinks-large.svg'
+import LogoLarge from './assets/images/Temp-logo-large.svg'
 import { Link } from 'react-router-dom'
 import { useRef, useState } from 'react';
 import { useAuth } from './AuthContext';
@@ -38,6 +38,7 @@ const SignUp = () => {
 
     if (passRef.current?.value !== passConfRef.current?.value){
       setPassError('')
+      setEmailError('')
       return setPassConfError('Passwords do not match')
     }
     
@@ -80,7 +81,7 @@ const SignUp = () => {
                 <p className='error'>{passConfError}</p>
                 <p  id='charinfo'>Password must contain at least 8 characters</p>
                 <p className='error-failed'>{error}</p>
-                <button disabled={loading} type='submit'>Login</button>
+                <button disabled={loading} type='submit'>Sign Up</button>
           </form>
           <p id='createacc'>Already have an account ? <Link to='/' style={linkStyle}>Login</Link></p>
         </div>

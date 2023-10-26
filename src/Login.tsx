@@ -1,4 +1,4 @@
-import LogoLarge from './assets/images/logo-devlinks-large.svg'
+import LogoLarge from './assets/images/Temp-logo-large.svg'
 // import EmailIcon from './assets/images/icon-email.svg'
 import { Link } from 'react-router-dom'
 import React from 'react'

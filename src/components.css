@@ -51,11 +51,17 @@ button {
 }
 
 button:active {
-    background-color: #BEADFF;
+    background-color: #bdadff;
+    box-shadow: #633CFF 0 0 10px;
+
 }
 
 button:hover {
-    background-color: #6742fa;
+    background-color: #957df7;
+}
+
+button:disabled {
+    background-color: hsla(252, 100%, 62%, 25%);
 }
 
 #description {

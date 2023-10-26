@@ -17,11 +17,13 @@ body {
 
 .head {
     display: grid;
-    height: 10vmin;
+    height: 20vmin;
     place-items: center;
-    margin-bottom: 10%;
+    margin-bottom: 0;
 
 }
+
+
 
 .Log-container {
     display: flex;

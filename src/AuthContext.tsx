@@ -14,6 +14,7 @@ type AuthProviderProps = {children : React.ReactNode}
 export function AuthProvider({children} : AuthProviderProps) {
   
   const [currentUser, setCurrentUser] = useState<User | null>()
+  const [loading, setLoading] = useState<boolean>(true)
 
   function signup(email : string, password : string){
     return createUserWithEmailAndPassword(auth, email, password)
@@ -22,6 +23,7 @@ export function AuthProvider({children} : AuthProviderProps) {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       setCurrentUser(user)
+      setLoading(false)
     })
 
     return unsubscribe
@@ -35,7 +37,7 @@ export function AuthProvider({children} : AuthProviderProps) {
   
   return (
     <AuthContext.Provider value = {value}>
-      {children}
+      {!loading && children}
     </AuthContext.Provider>
   )
 }
