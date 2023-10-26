@@ -31,7 +31,7 @@ const Login : React.FC = () => {
               <label htmlFor="Email">Email address</label>
               <input className='email' type="text" name='Email' placeholder={`e.g.: alex@email.com`} ref={emailRef} />
               <label htmlFor="Password">Password</label>
-              <input className='password' type="text" name='Password' placeholder={'Enter your password'} ref={passRef} />
+              <input className='password' type="password" name='Password' placeholder={'Enter your password'} ref={passRef} />
               <button type='submit'>Login</button>
           </form>
           <p id='createacc'>Don't have an account ? <Link to='/signup' style={linkStyle}>Create an account</Link></p>

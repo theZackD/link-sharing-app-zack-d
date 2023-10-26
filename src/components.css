@@ -61,3 +61,17 @@ button:hover {
 #description {
     margin-bottom: 10%;
 }
+
+.error {
+    color: red;
+    font-size: 12px;
+    margin: 0;
+    align-self: flex-end;
+    transform: translateX(-35px) translateY(-50px)
+}
+
+.error-failed {
+    color: red;
+    margin: 0;
+    margin-bottom:2%;
+}

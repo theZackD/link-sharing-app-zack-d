@@ -18,18 +18,37 @@ const SignUp = () => {
   const passConfRef = useRef<HTMLInputElement>(null)
   const { signup } = useAuth()
   const [error, setError] = useState<string>('')
+  const [emailError, setEmailError] = useState<string>('')
+  const [passError, setPassError] = useState<string>('')
+  const [passConfError, setPassConfError] = useState<string>('')
+
   const [loading, setLoading] = useState<boolean>(false)
 
   async function handleSubmit(e : React.FormEvent<HTMLFormElement>){
     e.preventDefault()
 
-    if (passRef.current?.value !== passConfRef.current?.value){
-      return setError('Passwords should match')
+    if (emailRef.current?.value == ''){
+      return setEmailError(`Can't be empty`)
     }
+
+    if (passRef.current?.value.length != undefined && passRef.current?.value.length < 8){
+      setEmailError('')
+      return setPassError('Please check again')
+    }
+
+    if (passRef.current?.value !== passConfRef.current?.value){
+      setPassError('')
+      return setPassConfError('Passwords do not match')
+    }
+    
+
 
 
     try{
+      setEmailError('')
+      setPassError('')
       setError('')
+      setPassConfError('')
       setLoading(true)
       await signup(emailRef.current?.value, passRef.current?.value)
     } catch {
@@ -52,11 +71,15 @@ const SignUp = () => {
           <form action="#" onSubmit={handleSubmit}>
                 <label htmlFor="Email">Email address</label>
                 <input className='email' type="text" name='Email' placeholder={`e.g.: alex@email.com`} ref={emailRef} />
+                <p className='error'>{emailError}</p>
                 <label htmlFor="Password">Password</label>
-                <input className='password' type="text" name='Password' placeholder='At least 8 characters' ref={passRef} />
+                <input className='password' type="password" name='Password' placeholder='At least 8 characters' ref={passRef} />
+                <p className='error'>{passError}</p>
                 <label htmlFor="Password">Confirm password</label>
-                <input className='password' type="text" name='Password' placeholder='At least 8 characters' ref={passConfRef} />
+                <input className='password' type="password" name='Password' placeholder='At least 8 characters' ref={passConfRef} />
+                <p className='error'>{passConfError}</p>
                 <p  id='charinfo'>Password must contain at least 8 characters</p>
+                <p className='error-failed'>{error}</p>
                 <button disabled={loading} type='submit'>Login</button>
           </form>
           <p id='createacc'>Already have an account ? <Link to='/' style={linkStyle}>Login</Link></p>
