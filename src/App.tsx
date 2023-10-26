@@ -1,16 +1,18 @@
 import { AuthProvider } from './AuthContext'
 import Login from './Login'
 import SignUp from './SignUp'
-import { Route, Routes } from 'react-router-dom'
+import Home from './Home'
+import { Routes, Route} from 'react-router-dom'
 
 function App() {
  
   return (
     <AuthProvider>
       <Routes>
-        <Route path='/' element={<Login />}/>
+        <Route path='/login' element={<Login />}/>
+        <Route path='/' element={<Home />} />
         <Route path='/signup' element={<SignUp />}/>
-      </Routes>
+    </Routes>
     </AuthProvider>
     )
 }

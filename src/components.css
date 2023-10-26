@@ -36,7 +36,7 @@ h2 {
     margin-bottom: 0;
 }
 
-button {
+.btn-1,  .btn-2 {
     box-sizing: border-box;
     width: 90%;
     height: 48px;
@@ -50,19 +50,36 @@ button {
     cursor: pointer;
 }
 
-button:active {
+.btn-1:active {
     background-color: #bdadff;
     box-shadow: #633CFF 0 0 10px;
 
 }
 
-button:hover {
+.btn-1:hover {
     background-color: #957df7;
 }
 
-button:disabled {
+.btn-1:disabled {
     background-color: hsla(252, 100%, 62%, 25%);
 }
+
+.btn-2 {
+    box-sizing: content-box;
+    background-color: white;
+    color: #633CFF;
+    border: #633CFF solid 2px;
+    width: fit-content;
+}
+
+.btn-2:hover {
+    background-color: #bdadff;
+}
+
+.btn-1:active {
+    box-shadow: #633CFF 0 0 15px;
+}
+
 
 #description {
     margin-bottom: 10%;

@@ -81,9 +81,9 @@ const SignUp = () => {
                 <p className='error'>{passConfError}</p>
                 <p  id='charinfo'>Password must contain at least 8 characters</p>
                 <p className='error-failed'>{error}</p>
-                <button disabled={loading} type='submit'>Sign Up</button>
+                <button className='btn-1' disabled={loading} type='submit'>Sign Up</button>
           </form>
-          <p id='createacc'>Already have an account ? <Link to='/' style={linkStyle}>Login</Link></p>
+          <p id='createacc'>Already have an account ? <Link to='/login' style={linkStyle}>Login</Link></p>
         </div>
     </div>
   )
