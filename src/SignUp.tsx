@@ -4,6 +4,7 @@ import LogoLarge from './assets/images/Temp-logo-large.svg'
 import { Link, useNavigate } from 'react-router-dom'
 import { useRef, useState } from 'react';
 import { useAuth } from './AuthContext';
+import { sendEmailVerification } from 'firebase/auth/cordova';
 
 
 const linkStyle = {
@@ -16,7 +17,7 @@ const SignUp = () => {
   const emailRef = useRef<HTMLInputElement>(null)
   const passRef = useRef<HTMLInputElement>(null)
   const passConfRef = useRef<HTMLInputElement>(null)
-  const { signup, logout } = useAuth()
+  const { signup, logout, verifyEmail, currentUser } = useAuth()
   const [error, setError] = useState<string>('')
   const [emailError, setEmailError] = useState<string>('')
   const [passError, setPassError] = useState<string>('')
@@ -44,9 +45,6 @@ const SignUp = () => {
       return setPassConfError('Passwords do not match')
     }
     
-
-
-
     try{
       setEmailError('')
       setPassError('')
@@ -54,7 +52,7 @@ const SignUp = () => {
       setPassConfError('')
       setLoading(true)
       await signup(emailRef.current?.value, passRef.current?.value)
-      await logout()
+      // await logout()
       navigate('/login')
     } catch {
       setError('Signup failed')

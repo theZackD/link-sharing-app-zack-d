@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState} from 'react'
 import { auth } from './firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth/cordova'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, sendEmailVerification } from 'firebase/auth/cordova'
 import { User } from '@firebase/auth/cordova'
 
 const AuthContext = React.createContext<any | undefined>(undefined)
@@ -17,7 +17,14 @@ export function AuthProvider({children} : AuthProviderProps) {
   const [loading, setLoading] = useState<boolean>(true)
 
   function signup(email : string, password : string){
-    return createUserWithEmailAndPassword(auth, email, password)
+    createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
+      // send verification mail.
+      sendEmailVerification(userCredential.user);
+      auth.signOut();
+      alert("Email sent");
+  })
+    return 
+    
   }
 
   function login(email : string, password : string){
