@@ -1,46 +1,41 @@
-
-
-@import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap");
 
 body {
-    font-family: 'Instrument Sans', sans-serif;
+  font-family: "Instrument Sans", sans-serif;
 }
 
 .container {
-    display: flex;
-    flex-direction: column;
-    background-color: #FAFAFA;
-    min-height: 60vh;
-    min-width: 450px;
-    width: 35vw;
+  display: flex;
+  flex-direction: column;
+  background-color: #fafafa;
+  min-height: 60vh;
+  min-width: 450px;
+  width: 35vw;
 }
 
 .head {
-    display: grid;
-    height: 20vmin;
-    place-items: center;
-    margin-bottom: 0;
-
+  display: grid;
+  height: 20vmin;
+  place-items: center;
+  margin-bottom: 0;
 }
 
-
-
 .Log-container {
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    min-height: 50vmin;
-    border-radius: 10px;
-    box-sizing: border-box;
-    padding: 5%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  min-height: 50vmin;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 5%;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #createacc {
-    text-align: center;
+  text-align: center;
 }

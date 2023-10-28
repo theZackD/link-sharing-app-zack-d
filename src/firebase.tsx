@@ -11,11 +11,11 @@ const firebaseConfig = {
   projectId: "auth-link-app-dev",
   storageBucket: "auth-link-app-dev.appspot.com",
   messagingSenderId: "157449266040",
-  appId: "1:157449266040:web:d7a30d9ba320364f815e8d"
+  appId: "1:157449266040:web:d7a30d9ba320364f815e8d",
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-export const auth = getAuth(app)
-export default app
+export const auth = getAuth(app);
+export default app;
