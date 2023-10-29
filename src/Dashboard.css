@@ -1,0 +1,53 @@
+.dash-container {
+    min-height: 100vh;
+    min-width: 100vw;
+}
+
+.tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.tab {
+    display: flex;
+    gap: 10%;
+    font-weight: 600;
+    box-sizing: content-box;
+    font-size: 16px;
+    width: 150px;
+    border-radius: 15%;
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.active, .active > * {
+    background-color: #EFEBFF;
+    color: #633CFF;
+}
+
+.svg2 {
+    fill: #633CFF;
+}
+
+
+.svg2 {
+    width: 30px;
+    height: auto;
+}
+
+.svg1 {
+    width: 20px;
+    height: auto;
+}
+
+#Prev {
+    width: 150px;
+}
+
+.dash-head {
+    display: flex;
+    justify-content: space-between;
+}
