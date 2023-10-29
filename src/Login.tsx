@@ -70,7 +70,7 @@ const Login: React.FC = () => {
         <form action="#" onSubmit={handleSubmit}>
           <label htmlFor="Email">Email address</label>
           <input
-            className="email"
+            className="email log-input"
             type="text"
             name="Email"
             placeholder={`e.g.: alex@email.com`}
@@ -79,7 +79,7 @@ const Login: React.FC = () => {
           <p className="error"> {emailError} </p>
           <label htmlFor="Password">Password</label>
           <input
-            className="password"
+            className="password log-input"
             type="password"
             name="Password"
             placeholder={"Enter your password"}

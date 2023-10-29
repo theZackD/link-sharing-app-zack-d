@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;600;700&display=swap");
 
-input {
+.log-input {
   height: 48px;
   width: 90%;
   margin-bottom: 5%;

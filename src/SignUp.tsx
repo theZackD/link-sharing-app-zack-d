@@ -4,7 +4,6 @@ import LogoLarge from "./assets/images/Temp-logo-large.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useRef, useState } from "react";
 import { useAuth } from "./AuthContext";
-import { sendEmailVerification } from "firebase/auth/cordova";
 
 const linkStyle = {
   textDecoration: "none",
@@ -15,7 +14,7 @@ const SignUp = () => {
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
   const passConfRef = useRef<HTMLInputElement>(null);
-  const { signup, logout, verifyEmail, currentUser } = useAuth();
+  const { signup, logout } = useAuth();
   const [error, setError] = useState<string>("");
   const [emailError, setEmailError] = useState<string>("");
   const [passError, setPassError] = useState<string>("");
@@ -53,7 +52,7 @@ const SignUp = () => {
       setPassConfError("");
       setLoading(true);
       await signup(emailRef.current?.value, passRef.current?.value);
-      // await logout()
+      await logout()
       navigate("/login");
     } catch {
       setError("Signup failed");
@@ -75,7 +74,7 @@ const SignUp = () => {
         <form action="#" onSubmit={handleSubmit}>
           <label htmlFor="Email">Email address</label>
           <input
-            className="email"
+            className="email log-input"
             type="text"
             name="Email"
             placeholder={`e.g.: alex@email.com`}
@@ -84,7 +83,7 @@ const SignUp = () => {
           <p className="error">{emailError}</p>
           <label htmlFor="Password">Password</label>
           <input
-            className="password"
+            className="password log-input"
             type="password"
             name="Password"
             placeholder="At least 8 characters"
@@ -93,7 +92,7 @@ const SignUp = () => {
           <p className="error">{passError}</p>
           <label htmlFor="Password">Confirm password</label>
           <input
-            className="password"
+            className="password log-input"
             type="password"
             name="Password"
             placeholder="At least 8 characters"
