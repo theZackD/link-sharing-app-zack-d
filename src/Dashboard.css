@@ -74,7 +74,7 @@
 .full-op {
   background-color: white;
   border-radius: 10px;
-  height: 125vh;
+  height: 130vh;
 }
 
 .op-side {
@@ -143,12 +143,13 @@ hr {
     display: flex;
     flex-direction: column;
     gap: 2.5%;
-    margin-bottom: 2.5%;
+    margin-bottom: 5%;
 }
 
 .upload-text {
     color: #633cff;
     font-weight: 700;
+    z-index: 20;
 }
 
 .upload-image {
@@ -167,8 +168,9 @@ hr {
     border-radius: 10px;
 }
 
-#up-img {
+.svg-up {
     margin: auto;
+    z-index: 20
 }
 
 .upload-space {
@@ -226,13 +228,68 @@ input[type=file]{
     color: transparent;
     background-color: transparent;
     opacity: 0;
+    z-index: 100;
 }
 
 .deet {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
+
+.dash-error {
+    position: absolute;
+    color: red;
+    right: 2%;
+    font-size: 12px;
+}
+
+#pp-preview {
+    position: absolute;
+    z-index: 5;
+    width: 13vw;
+    height: 30vh;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.overlay {
+    background-color: black;
+    position: absolute;
+    z-index: 10;
+    width: 13vw;
+    height: 30vh;
+    opacity: 0.7;
+    border-radius: 10px;
+}
+
+.preview-links {
+    outline: auto;
+    position: relative;
+}
+
+.pp-container {
+    position: absolute;
+    width: 95px;
+    aspect-ratio: 1;
+    top: 64px;
+    left: 105px;
+
+}
+
+#preview-propic {
+    position: absolute;
+    width: 95px;
+    aspect-ratio: 1;
+    opacity: .3;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* .pp-container {
+    width: 50px;
+} */
 
 .OFF {
     display: none;
