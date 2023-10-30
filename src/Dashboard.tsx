@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import LogoLarge from "./assets/images/logo-devlinks-large.svg";
 import PhoneImage from "./assets/images/illustration-phone-mockup.svg";
 import Illustration from "./assets/images/illustration-empty.svg";
-import Upload from "./assets/images/icon-upload-image.svg"
+import { ref, uploadBytes } from "firebase/storage";
+import { Storage } from "./firebase";
+import { v4 } from "uuid";
+import Upload from "./assets/images/icon-upload-image.svg";
 import "./Dashboard.css";
 
 function LinkIcon(props: { fill?: string; className: string }) {
@@ -43,6 +46,32 @@ function ProfileIcon(props: { fill?: string; className: string }) {
 
 export default function Dashboard() {
   const [tabSwitch, setTabSwitch] = useState<number>(0);
+
+  // interface HTMLInputEvent extends Event {
+  //   target: HTMLInputElement
+  // }
+
+  const [imageUpload, setImageUpload] = useState<File | null>(null);
+
+  // const handleUpload = function(event : ChangeEvent<HTMLInputElement>){
+  //   const { files } = event.target
+  //   console.log(files)
+  //   console.log(imageUpload)
+  // }
+
+  const UploadImage = () => {
+    console.log(imageUpload);
+    // if (imageUpload == null) {
+    //   return;
+    // }
+    // const imageRef = ref(
+    //   Storage,
+    //   `profile_pictures/${imageUpload.name + v4()}`,
+    // );
+    // uploadBytes(imageRef, imageUpload).then(() => {
+    //   console.log("image uploaded");
+    // });
+  };
 
   const ChangeTab = (n: number) => {
     setTabSwitch(n);
@@ -89,13 +118,17 @@ export default function Dashboard() {
             <div className="customize">
               <h1 className="cus-title">Customize your links</h1>
               <p>
-                Add/edit/remove links below and then share all your profiles with
-                the world
+                Add/edit/remove links below and then share all your profiles
+                with the world
               </p>
             </div>
-            <button id="new-link-btn" className="btn-2">+ Add new link</button>
+            <button id="new-link-btn" className="btn-2">
+              + Add new link
+            </button>
             <div className="explanation">
-              <div className=""><img src={Illustration} alt="" /></div>
+              <div className="">
+                <img src={Illustration} alt="" />
+              </div>
               <h1 className="cus_title">Let's get you started</h1>
               <p id="link-exp-text">
                 Use the "Add new link" button to get started. Once you have more
@@ -111,36 +144,68 @@ export default function Dashboard() {
             </div>
             <div className="upload-space">
               <p>Profile picure</p>
-              <div className="upload-image">
-                <img id="up-img" src={Upload} alt="" />
-                <p className="upload-text">+ Upload Image</p>
-              </div>
-              <p id="img-format">Image must be below 1024x1024px. <br />Use PNG or JPG format</p>
+              <label htmlFor="image-upload">
+                <div className="upload-image">
+                  <input
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                      setImageUpload(event.target.files![0]);
+                    }}
+                    type="file"
+                    name="image-upload"
+                    id="file-input"
+                    accept=".jpg,.png"
+                  />
+                  <img id="up-img" src={Upload} alt="" />
+                  <p className="upload-text">+ Upload Image</p>
+                </div>
+              </label>
+
+              <p id="img-format">
+                Image must be below 1024x1024px. <br />
+                Use PNG or JPG format
+              </p>
             </div>
             <div className="details">
               <div className="deet">
-                <label className="prof-label" htmlFor="First name">First name*</label>
-                <input className="prof-input"  type="text" placeholder="e.g. John" />
-              </div>              
+                <label className="prof-label" htmlFor="First name">
+                  First name*
+                </label>
+                <input
+                  className="prof-input"
+                  type="text"
+                  placeholder="e.g. John"
+                />
+              </div>
               <div className="deet">
-                <label className="prof-label" htmlFor="First name">Last name*</label>
-                <input className="prof-input" type="text" placeholder="e.g. Appleseed" />
+                <label className="prof-label" htmlFor="First name">
+                  Last name*
+                </label>
+                <input
+                  className="prof-input"
+                  type="text"
+                  placeholder="e.g. Appleseed"
+                />
               </div>
               <div className="deet">
                 <label className="prof-label" htmlFor="Email">
                   Email
                 </label>
-                <input className="prof-input" type="text" placeholder="e.g email@example.com" />
+                <input
+                  className="prof-input"
+                  type="text"
+                  placeholder="e.g email@example.com"
+                />
               </div>
             </div>
           </div>
           <hr />
           <div className="save-link">
-            <button disabled={true} id="save-btn" className="btn-1">Save</button>
+            <button onClick={UploadImage} id="save-btn" className="btn-1">
+              Save
+            </button>
           </div>
         </div>
       </div>
-
     </div>
   );
 }
