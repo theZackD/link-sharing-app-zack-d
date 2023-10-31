@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, JSXElementConstructor, useRef, useState } from "react";
 import LogoLarge from "./assets/images/logo-devlinks-large.svg";
 import LinkEntry from "./LinkEntry";
 import PhoneImage from "./assets/images/illustration-phone-mockup.svg";
@@ -85,6 +85,8 @@ export default function Dashboard() {
   const [emailAddress, setEmailAdress] = useState<string>("");
 
   const [linkNumber, setLinkNumber] = useState<number>(1);
+
+  const [LinkRank, setLinkRank] = useState<number[]>([])
 
   const handleNamePreview = () => {
     return setFullName(
@@ -179,7 +181,12 @@ export default function Dashboard() {
                 with the world
               </p>
             </div>
-            <button id="new-link-btn" className="btn-2">
+            <button onClick={() => {
+              setLinkRank([...LinkRank,linkNumber]);
+              setLinkNumber(linkNumber + 1)}
+            } 
+            id="new-link-btn" 
+            className="btn-2">
               + Add new link
             </button>
 
@@ -193,9 +200,9 @@ export default function Dashboard() {
                 than one link, you can reorder and edit them. We're here to help
                 you share your profiles with everyone!
               </p>
-            </div> */}
+              </div> */}
 
-            <LinkEntry Rank={linkNumber} />
+            <div className="links-container">{LinkRank.map(LN => ( <LinkEntry Rank={LN} /> ))}</div>
           </div>
           <div className={tabSwitch === 1 ? "full-pro" : "full-pro OFF"}>
             <div>
