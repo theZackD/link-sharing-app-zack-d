@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef, useState } from "react";
 import LogoLarge from "./assets/images/logo-devlinks-large.svg";
+import LinkEntry from "./LinkEntry";
 import PhoneImage from "./assets/images/illustration-phone-mockup.svg";
 import Illustration from "./assets/images/illustration-empty.svg";
 import { ref, uploadBytes } from "firebase/storage";
@@ -75,8 +76,25 @@ export default function Dashboard() {
   const firstNameRef = useRef<HTMLInputElement>(null);
   const lastNameRef = useRef<HTMLInputElement>(null);
 
+  const [isActiveBtn, setIsActiveBtn] = useState<boolean>(false);
+
   const [firstError, setFirstError] = useState<string>("");
   const [lastError, setLastError] = useState<string>("");
+
+  const [fullName, setFullName] = useState<string>("");
+  const [emailAddress, setEmailAdress] = useState<string>("");
+
+  const [linkNumber, setLinkNumber] = useState<number>(1);
+
+  const handleNamePreview = () => {
+    return setFullName(
+      `${firstNameRef.current?.value} ${lastNameRef.current?.value}`,
+    );
+  };
+
+  const handleEmailPreview = () => {
+    return setEmailAdress(`${emailRef.current?.value}`);
+  };
 
   const UploadImage = () => {
     if (firstNameRef.current?.value == "") {
@@ -89,6 +107,8 @@ export default function Dashboard() {
     if (imageUpload == null) {
       return;
     }
+    setFirstError("");
+    setLastError("");
     const imageRef = ref(
       Storage,
       `profile_pictures/${imageUpload.name + v4()}`,
@@ -138,11 +158,16 @@ export default function Dashboard() {
             <img id="Phone" src={PhoneImage} alt="" />
             <div className="pp-container">
               {imageUpload ? (
-                <img id="preview-propic" src={URL.createObjectURL(imageUpload)} />
+                <img
+                  id="preview-propic"
+                  src={URL.createObjectURL(imageUpload)}
+                />
               ) : (
                 <img id="pp-preview" className="OFF" src="" alt="" />
               )}
             </div>
+            <p id="fl-name"> {fullName} </p>
+            <p id="emailaddress"> {emailAddress} </p>
           </div>
         </div>
         <div className="full-op">
@@ -157,7 +182,8 @@ export default function Dashboard() {
             <button id="new-link-btn" className="btn-2">
               + Add new link
             </button>
-            <div className="explanation">
+
+            {/* <div className="explanation">
               <div className="">
                 <img src={Illustration} alt="" />
               </div>
@@ -167,7 +193,9 @@ export default function Dashboard() {
                 than one link, you can reorder and edit them. We're here to help
                 you share your profiles with everyone!
               </p>
-            </div>
+            </div> */}
+
+            <LinkEntry Rank={linkNumber} />
           </div>
           <div className={tabSwitch === 1 ? "full-pro" : "full-pro OFF"}>
             <div>
@@ -182,6 +210,7 @@ export default function Dashboard() {
                   <input
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                       setImageUpload(event.target.files![0]);
+                      setIsActiveBtn(true);
                     }}
                     type="file"
                     name="image-upload"
@@ -220,6 +249,7 @@ export default function Dashboard() {
                   First name*
                 </label>
                 <input
+                  onKeyUp={handleNamePreview}
                   className="prof-input"
                   type="text"
                   placeholder="e.g. John"
@@ -232,6 +262,7 @@ export default function Dashboard() {
                   Last name*
                 </label>
                 <input
+                  onKeyUp={handleNamePreview}
                   className="prof-input"
                   type="text"
                   placeholder="e.g. Appleseed"
@@ -244,6 +275,7 @@ export default function Dashboard() {
                   Email
                 </label>
                 <input
+                  onKeyUp={handleEmailPreview}
                   className="prof-input"
                   type="text"
                   placeholder="e.g email@example.com"
@@ -254,7 +286,12 @@ export default function Dashboard() {
           </div>
           <hr />
           <div className="save-link">
-            <button onClick={UploadImage} id="save-btn" className="btn-1">
+            <button
+              disabled={!isActiveBtn}
+              onClick={UploadImage}
+              id="save-btn"
+              className="btn-1"
+            >
               Save
             </button>
           </div>

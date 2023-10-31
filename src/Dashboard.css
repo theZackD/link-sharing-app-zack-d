@@ -203,6 +203,10 @@ hr {
     padding-left: 2%;
 }
 
+.prof-input:focus {
+    box-shadow: 0 0 20px #633cffa9;
+}
+
 .details {
     display: flex;
     flex-direction: column;
@@ -265,7 +269,6 @@ input[type=file]{
 }
 
 .preview-links {
-    outline: auto;
     position: relative;
 }
 
@@ -282,7 +285,7 @@ input[type=file]{
     position: absolute;
     width: 95px;
     aspect-ratio: 1;
-    opacity: .3;
+    border: solid blue;
     object-fit: cover;
     border-radius: 50%;
 }
@@ -290,6 +293,33 @@ input[type=file]{
 /* .pp-container {
     width: 50px;
 } */
+
+#fl-name {
+    position: absolute;
+    font-size: 18px;
+    color: black;
+    font-weight: 700;
+    top: 165px;
+    left: 13px;
+  
+    background-color: white;
+    width: 281px;
+    opacity: 1;
+    text-align: center;
+}
+
+#emailaddress {
+    position: absolute;
+    font-weight: 400;
+    top: 190px;
+    height: min-content;
+    left: 13px;
+  
+    background-color: white;
+    width: 281px;
+    opacity: 1;
+    text-align: center;
+}
 
 .OFF {
     display: none;

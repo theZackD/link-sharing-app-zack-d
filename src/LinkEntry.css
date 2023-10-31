@@ -1,0 +1,57 @@
+.link-header {
+    display: flex;
+    justify-content: space-between;
+    flex-grow: 0;
+    margin-left: 5%;
+    margin-right: 5%;
+
+}
+
+.fulllinktitle {
+    display: flex;
+    gap: 10px;
+}
+
+.link-title {
+    font-weight: 700;
+}
+
+#link-thingy {
+    max-width: 12px;
+    cursor: pointer;
+}
+
+.btn-3 {
+    font-family: inherit;
+    color: gray;
+    letter-spacing: .1px;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.plat {
+    margin-left: 5%;
+    margin-top: 0;
+}
+
+.link-comp-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f3f3;
+    height: 50vh;
+    box-sizing: border-box;
+    border-radius: 20px;
+}
+
+#Link-input {
+    margin: auto;
+    margin-top: 0;
+    width: 90%;
+    height: 50px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: rgba(128, 128, 128, 0.411) solid 1px;
+    padding-left: 5%;
+}
