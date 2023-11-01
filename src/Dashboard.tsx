@@ -28,7 +28,6 @@ import "./Dashboard.css";
 
 interface props {
   Rank: number;
-  onClick : (event : SyntheticEvent) => void
   value : any
 }
 
@@ -193,7 +192,20 @@ export default function Dashboard() {
             <img id="link-thingy" src={EqualSign} alt="" />
             <p className="link-title">Link #{props.Rank}</p>
           </div>
-          <button onClick={props.onClick} className="btn-3">Remove</button>
+          <button onClick={() => {
+                if(props.Rank == 1){
+                  let v2 = value
+                  v2.shift()
+                  setValue([...v2,0])
+                } else {
+                  let v2 = value.slice(props.Rank-1)
+                  v2.shift()
+                  setValue([...value.slice(0,props.Rank-1),...v2,0])
+                }
+                console.log(value)
+                setLinkRank(Array.from({length: linkNumber-2}, (_, i) => i + 1))
+                setLinkNumber(linkNumber - 1)
+              }} className="btn-3">Remove</button>
         </div>
         <label className="plat">Platform</label>
         <SelectMenu
@@ -206,7 +218,9 @@ export default function Dashboard() {
           }}
         />
         <label className="plat">Link</label>
-        <input id="Link-input" type="text" placeholder={options[value[props.Rank]].placeholder}/>
+        <input id="Link-input" type="text" placeholder={
+          options[value[props.Rank]].placeholder
+          }/>
       </div>
     );
   }
@@ -295,11 +309,7 @@ export default function Dashboard() {
               </div>
 
             <div className="links-container">{LinkRank.map(LN => ( <div className="linky">
-              <LinkEntry value={options[5]} onClick={() => {
-
-                setLinkRank(Array.from({length: linkNumber-2}, (_, i) => i + 1))
-                setLinkNumber(linkNumber - 1)
-              }}  Rank={LN} />
+              <LinkEntry value={options[5]}  Rank={LN} />
             </div> ))}</div>
           </div>
           <div className={tabSwitch === 1 ? "full-pro" : "full-pro OFF"}>
