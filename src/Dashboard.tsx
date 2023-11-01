@@ -164,11 +164,16 @@ export default function Dashboard() {
 
   const handleLinkPreview1 = (event : React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key == 'Enter'){
-      console.log(prevRef1.current?.value)
       var prevy = prevRef1.current?.value
       setLinkPreviews1(prevRef1.current?.value!)
       setTimeout(() => {
         prevRef1!.current!.value = prevy!
+        prevRef2.current && (prevRef2.current.value = linkPreview2);
+        prevRef3.current && (prevRef3.current.value = linkPreview3);
+        prevRef4.current && (prevRef4.current.value = linkPreview4);
+        prevRef5.current && (prevRef5.current.value = linkPreview5);
+        console.log(linkPreview1)
+        setIsActiveBtn(true)
       }, 10);
       setTimeout(() => {
         var LA : HTMLInputElement | null = document.querySelector('#l1');
@@ -184,6 +189,12 @@ export default function Dashboard() {
       setLinkPreviews2(prevRef2.current?.value!)
       setTimeout(() => {
         prevRef2!.current!.value = prevy!
+        prevRef1.current && (prevRef1.current.value = linkPreview1);
+        prevRef3.current && (prevRef3.current.value = linkPreview3);
+        prevRef4.current && (prevRef4.current.value = linkPreview4);
+        prevRef5.current && (prevRef5.current.value = linkPreview5);
+        setIsActiveBtn(true)
+        console.log(linkPreview2)
       }, 10);
       setTimeout(() => {
         var LA : HTMLInputElement | null = document.querySelector('#l2');
@@ -199,6 +210,12 @@ export default function Dashboard() {
       setLinkPreviews3(prevRef3.current?.value!)
       setTimeout(() => {
         prevRef3!.current!.value = prevy!
+        prevRef2.current && (prevRef2.current.value = linkPreview2);
+        prevRef1.current && (prevRef1.current.value = linkPreview1);
+        prevRef4.current && (prevRef4.current.value = linkPreview4);
+        prevRef5.current && (prevRef5.current.value = linkPreview5);
+        setIsActiveBtn(true)
+        console.log(linkPreview3)
       }, 10);
       setTimeout(() => {
         var LA : HTMLInputElement | null = document.querySelector('#l3');
@@ -214,6 +231,12 @@ export default function Dashboard() {
       setLinkPreviews4(prevRef4.current?.value!)
       setTimeout(() => {
         prevRef4!.current!.value = prevy!
+        prevRef2.current && (prevRef2.current.value = linkPreview2);
+        prevRef3.current && (prevRef3.current.value = linkPreview3);
+        prevRef1.current && (prevRef1.current.value = linkPreview1);
+        prevRef5.current && (prevRef5.current.value = linkPreview5);
+        setIsActiveBtn(true)
+        console.log(linkPreview4)
       }, 10);
       setTimeout(() => {
         var LA : HTMLInputElement | null = document.querySelector('#l4');
@@ -229,6 +252,12 @@ export default function Dashboard() {
       setLinkPreviews5(prevRef5.current?.value!)
       setTimeout(() => {
         prevRef5!.current!.value = prevy!
+        prevRef2.current && (prevRef2.current.value = linkPreview2);
+        prevRef3.current && (prevRef3.current.value = linkPreview3);
+        prevRef4.current && (prevRef4.current.value = linkPreview4);
+        prevRef1.current && (prevRef1.current.value = linkPreview1);
+        setIsActiveBtn(true)
+        console.log(linkPreview5)
       }, 10);
       setTimeout(() => {
         var LA : HTMLInputElement | null = document.querySelector('#l5');
@@ -268,7 +297,7 @@ export default function Dashboard() {
 
   const [LinkRank, setLinkRank] = useState<number[]>([])
 
-  const [value, setValue] = useState<number[]>([0]);
+  const [value, setValue] = useState<number[]>([]);
   const [PH, setPH] = useState<string | undefined>(options[0].placeholder)
 
   function changem(arr : number[],i : number,v : number){
@@ -298,7 +327,7 @@ export default function Dashboard() {
                   setValue([...value.slice(0,props.Rank),...v2])
                   console.log(value)
                 }
-                console.log(options[value[1]].label)
+                // console.log(options[value[]].label)
 
                 setLinkRank(Array.from({length: linkNumber-2}, (_, i) => i + 1))
                 setLinkNumber(linkNumber - 1)
@@ -307,7 +336,7 @@ export default function Dashboard() {
         <label className="plat">Platform</label>
         <SelectMenu
           options={options}
-          value={options[value[props.Rank]]}
+          value={options[value[props.Rank]] ? options[value[props.Rank]] : options[0]}
           onChange={(o) => {
               setValue(changem(value, props.Rank, o?.value))
               setPH(o?.placeholder)
@@ -316,7 +345,7 @@ export default function Dashboard() {
         />
         <label className="plat">Link</label>
         <input onKeyUp={(e) => props.handlePrev(e)} id={props.id} type="text" placeholder={
-          options[value[props.Rank]].placeholder
+          options[value[props.Rank]] ? options[value[props.Rank]].placeholder : options[0].placeholder
           }
           ref={prevRefs[props.Rank-1]
           }
@@ -332,7 +361,7 @@ export default function Dashboard() {
         <img src={LogoLarge} alt="" />
         <div className="tabs">
           <div
-            onClick={() => ChangeTab(0)}
+            onClick={() => (ChangeTab(0), console.log(value), console.log(LinkRank))}
             className={tabSwitch === 0 ? "tab active" : "tab"}
           >
             <LinkIcon
@@ -342,7 +371,7 @@ export default function Dashboard() {
             <p>Links</p>
           </div>
           <div
-            onClick={() => ChangeTab(1)}
+            onClick={() => (ChangeTab(1))}
             className={tabSwitch === 1 ? "tab active" : "tab"}
           >
             <ProfileIcon
@@ -428,8 +457,12 @@ export default function Dashboard() {
               }
               setIsShownExp(false)
               setValue([...value,0])
-              setLinkRank([...LinkRank,linkNumber]);
-              setLinkNumber(linkNumber + 1)}
+              setTimeout(() => {
+                
+                setLinkRank([...LinkRank,linkNumber]);
+                setLinkNumber(linkNumber + 1)
+              }, 100);
+            }
             } 
             id="new-link-btn" 
             className="btn-2">
@@ -451,7 +484,7 @@ export default function Dashboard() {
 {/* Entry ---------------------------------------------------------------------------------------- */}
 
             <div className="links-container">
-              {LinkRank[0] && 
+              {(LinkRank[0]+1) && 
               <div className='linky'>
                 <LinkEntry handlePrev={handleLinkPreview1} id="l1"
                 Rank={LinkRank[0]} />
@@ -476,11 +509,7 @@ export default function Dashboard() {
                 <LinkEntry handlePrev={handleLinkPreview5} id="l5"
                 Rank={LinkRank[4]} />
               </div>}
-              {/* {LinkRank.map(LN => ( <div className="linky">
-              <LinkEntry onKeyUp={() => (handleLinkPreview(LN-1))}
-              ref={prevRefs[LN-1]}  
-              Rank={LN} />
-            </div> ))} */}
+
             </div>
           </div>
           <div className={tabSwitch === 1 ? "full-pro" : "full-pro OFF"}>
@@ -538,7 +567,7 @@ export default function Dashboard() {
                   onKeyUp={handleNamePreview}
                   className="prof-input"
                   type="text"
-                  placeholder="e.g. Zakaria"
+                  placeholder="e.g. Zakaria "
                   ref={firstNameRef}
                 />
                 <p className="dash-error">{firstError}</p>
