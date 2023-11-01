@@ -166,6 +166,7 @@ export default function Dashboard() {
     if (event.key == 'Enter'){
       var prevy = prevRef1.current?.value
       setLinkPreviews1(prevRef1.current?.value!)
+      setIsActiveBtn(true)
       setTimeout(() => {
         prevRef1!.current!.value = prevy!
         prevRef2.current && (prevRef2.current.value = linkPreview2);
@@ -186,6 +187,7 @@ export default function Dashboard() {
     if (event.key == 'Enter'){
       console.log(prevRef2.current?.value)
       var prevy = prevRef2.current?.value
+      setIsActiveBtn(true)
       setLinkPreviews2(prevRef2.current?.value!)
       setTimeout(() => {
         prevRef2!.current!.value = prevy!
@@ -207,6 +209,7 @@ export default function Dashboard() {
     if (event.key == 'Enter'){
       console.log(prevRef3.current?.value)
       var prevy = prevRef3.current?.value
+      setIsActiveBtn(true)
       setLinkPreviews3(prevRef3.current?.value!)
       setTimeout(() => {
         prevRef3!.current!.value = prevy!
@@ -228,6 +231,7 @@ export default function Dashboard() {
     if (event.key == 'Enter'){
       console.log(prevRef4.current?.value)
       var prevy = prevRef4.current?.value
+      setIsActiveBtn(true)
       setLinkPreviews4(prevRef4.current?.value!)
       setTimeout(() => {
         prevRef4!.current!.value = prevy!
@@ -249,6 +253,7 @@ export default function Dashboard() {
     if (event.key == 'Enter'){
       console.log(prevRef5.current?.value)
       var prevy = prevRef5.current?.value
+      setIsActiveBtn(true)
       setLinkPreviews5(prevRef5.current?.value!)
       setTimeout(() => {
         prevRef5!.current!.value = prevy!
@@ -264,6 +269,26 @@ export default function Dashboard() {
         LA!.focus()
       }, 20);
     }
+  }
+
+
+  const [isSharePg, setIsSharePg] = useState<Boolean>(false)
+
+  const backToEditor = () => {
+    return setIsSharePg(false)
+  }
+
+  const PreviewBTN = () => {
+    return setIsSharePg(true)
+  }
+
+  const handleSavelinks = () => {
+    setIsActiveBtn(false)
+    prevRef1.current && setLinkPreviews1(prevRef1.current.value)
+    prevRef2.current && setLinkPreviews2(prevRef2.current.value)
+    prevRef3.current && setLinkPreviews3(prevRef3.current.value)
+    prevRef4.current && setLinkPreviews4(prevRef4.current.value)
+    prevRef5.current && setLinkPreviews5(prevRef5.current.value)
   }
     
 
@@ -356,7 +381,8 @@ export default function Dashboard() {
   
 
   return (
-    <div className="dash-container">
+    <>
+    <div className={isSharePg ? "OFF" : "dash-container"}>
       <div className="dash-head">
         <img src={LogoLarge} alt="" />
         <div className="tabs">
@@ -381,7 +407,7 @@ export default function Dashboard() {
             <p>Profile Details</p>
           </div>
         </div>
-        <button className="btn-2" id="Prev">
+        <button onClick={PreviewBTN} className="btn-2" id="Prev">
           Preview
         </button>
       </div>
@@ -603,7 +629,7 @@ export default function Dashboard() {
           <div className="save-link">
             <button
               disabled={!isActiveBtn}
-              onClick={UploadImage}
+              onClick={tabSwitch == 1 ? UploadImage : handleSavelinks}
               id="save-btn"
               className="btn-1"
             >
@@ -613,5 +639,67 @@ export default function Dashboard() {
         </div>
       </div>
     </div>
+    <div className={isSharePg ? "share-page" : "OFF"}>
+      <div className="purple-part">
+        <div className="navbar">
+          <button id="back-edit" onClick={backToEditor} className="btn-2">Back to Editor</button>
+          <button id="share" className="btn-1">Share Link</button>
+        </div>
+      </div>
+      <div className="card">
+      <div className="colored-prevs2">
+             {options[value[1]] && ( <div className={`linkpreviewsquare ${options[value[1]] && options[value[1]].label}`}>
+                <div className="logoandname">
+                  {value[1]+1 ? <img className="previcon" src={options[value[1]].icon} alt="" /> : <></>}
+                  <p>{options[value[1]] && options[value[1]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>)}
+              {options[value[2]] && (<div className={`linkpreviewsquare ${options[value[2]] && options[value[2]].label}`}>
+                <div className="logoandname">
+                  {value[2]+1 ? <img className="previcon" src={options[value[2]].icon} alt="" /> : <></>}
+                  <p>{options[value[2]] && options[value[2]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>)}
+              {options[value[3]] && (<div className={`linkpreviewsquare ${options[value[3]] && options[value[3]].label}`}>
+                <div className="logoandname">
+                  {value[3]+1 ? <img className="previcon" src={options[value[3]].icon} alt="" /> : <></>}
+                  <p>{options[value[3]] && options[value[3]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>)}
+              {options[value[4]] && (<div className={`linkpreviewsquare ${options[value[4]] && options[value[4]].label}`}>
+                <div className="logoandname">
+                  {value[4]+1 ? <img className="previcon" src={options[value[4]].icon} alt="" /> : <></>}
+                  <p>{options[value[4]] && options[value[4]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>)}
+              {options[value[5]] && (<div className={`linkpreviewsquare ${options[value[5]] && options[value[5]].label}`}>
+                <div className="logoandname">
+                  {value[5]+1 ? <img className="previcon" src={options[value[5]].icon} alt="" /> : <></>}
+                  <p>{options[value[5]] && options[value[5]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>)}
+            </div>
+            <div className="card-cont">
+              <div className="pp-container2">
+                {imageUpload ? (
+                  <img
+                    id="preview-propic"
+                    src={URL.createObjectURL(imageUpload)}
+                  />
+                ) : (
+                  <img id="pp-preview" className="OFF" src="" alt="" />
+                )}
+              </div>
+              <p id="fl-name2"> {fullName} </p>
+              <p id="emailaddress2"> {emailAddress} </p>
+            </div>
+      </div>
+    </div>
+    </>
   );
 }
