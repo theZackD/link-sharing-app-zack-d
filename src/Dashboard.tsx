@@ -20,15 +20,18 @@ import TWicon from "./assets/images/icon-twitter.svg";
 import TWTCHicon from "./assets/images/icon-twitch.svg";
 import SOicon from "./assets/images/icon-stack-overflow.svg";
 import SelectMenu from "./SelectMenu";
+import Arrow from './assets/images/icon-arrow-right.svg'
 
 
 // import Upload from "./assets/images/icon-upload-image.svg";
 import "./Dashboard.css";
 
 
+
 interface props {
   Rank: number;
-  value : any
+  id : string;
+  handlePrev : (e : React.KeyboardEvent<HTMLInputElement>) => void
 }
 
 function LinkIcon(props: { fill?: string; className: string }) {
@@ -87,29 +90,9 @@ function ProfileIcon(props: { fill?: string; className: string }) {
 
 export default function Dashboard() {
   const [tabSwitch, setTabSwitch] = useState<number>(0);
-
-  // interface HTMLInputEvent extends Event {
-  //   target: HTMLInputElement
-  // }
-
-  const [imageUpload, setImageUpload] = useState<File | null>(null);
-
-  const emailRef = useRef<HTMLInputElement>(null);
-  const firstNameRef = useRef<HTMLInputElement>(null);
-  const lastNameRef = useRef<HTMLInputElement>(null);
-
-  const [isActiveBtn, setIsActiveBtn] = useState<boolean>(false);
-
-  const [firstError, setFirstError] = useState<string>("");
-  const [lastError, setLastError] = useState<string>("");
-
-  const [fullName, setFullName] = useState<string>("");
-  const [emailAddress, setEmailAdress] = useState<string>("");
-
-  const [isShownExp, setIsShownExp] = useState<Boolean>(true)
-
+  
   const options = [
-    { label: "Youtube", icon: YTicon, value: 1, 
+    { label: "YouTube", icon: YTicon, value: 1, 
     placeholder : "e.g. https://www.youtube.com/zackd" },
     { label: "Facebook", icon: FBicon, value: 2, 
     placeholder : "e.g. https://www.facebook.com/zackd" },
@@ -132,7 +115,41 @@ export default function Dashboard() {
     { label: "CodePen", icon: CPicon, value: 11, 
     placeholder : "e.g. https://www.codepen.com/zackd"  },
   ];
+  // interface HTMLInputEvent extends Event {
+  //   target: HTMLInputElement
+  // }
 
+  const [imageUpload, setImageUpload] = useState<File | null>(null);
+
+  const emailRef = useRef<HTMLInputElement>(null);
+  const firstNameRef = useRef<HTMLInputElement>(null);
+  const lastNameRef = useRef<HTMLInputElement>(null);
+
+  const [isActiveBtn, setIsActiveBtn] = useState<boolean>(false);
+
+  const [firstError, setFirstError] = useState<string>("");
+  const [lastError, setLastError] = useState<string>("");
+
+  const [isShownExp, setIsShownExp] = useState<Boolean>(true);
+
+  const [fullName, setFullName] = useState<string>("");
+  const [emailAddress, setEmailAdress] = useState<string>("");
+
+  const [linkPreview1, setLinkPreviews1] = useState<string>('');
+  const [linkPreview2, setLinkPreviews2] = useState<string>('');
+  const [linkPreview3, setLinkPreviews3] = useState<string>('');
+  const [linkPreview4, setLinkPreviews4] = useState<string>('');
+  const [linkPreview5, setLinkPreviews5] = useState<string>('');
+  
+  // const setGroup = [setLinkPreviews1,setLinkPreviews2,setLinkPreviews3,setLinkPreviews4,setLinkPreviews5]
+  
+  const prevRef1 = useRef<HTMLInputElement>(null)
+  const prevRef2 = useRef<HTMLInputElement>(null)
+  const prevRef3 = useRef<HTMLInputElement>(null)
+  const prevRef4 = useRef<HTMLInputElement>(null)
+  const prevRef5 = useRef<HTMLInputElement>(null)
+
+  const prevRefs = [prevRef1,prevRef2,prevRef3,prevRef4,prevRef5]
   
   const handleNamePreview = () => {
     return setFullName(
@@ -141,9 +158,86 @@ export default function Dashboard() {
     };
     
     const handleEmailPreview = () => {
+      console.log(emailRef)
       return setEmailAdress(`${emailRef.current?.value}`);
     };
+
+  const handleLinkPreview1 = (event : React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == 'Enter'){
+      console.log(prevRef1.current?.value)
+      var prevy = prevRef1.current?.value
+      setLinkPreviews1(prevRef1.current?.value!)
+      setTimeout(() => {
+        prevRef1!.current!.value = prevy!
+      }, 10);
+      setTimeout(() => {
+        var LA : HTMLInputElement | null = document.querySelector('#l1');
+        LA!.focus()
+      }, 20);
+    }
+  }
+  
+  const handleLinkPreview2 = (event : React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == 'Enter'){
+      console.log(prevRef2.current?.value)
+      var prevy = prevRef2.current?.value
+      setLinkPreviews2(prevRef2.current?.value!)
+      setTimeout(() => {
+        prevRef2!.current!.value = prevy!
+      }, 10);
+      setTimeout(() => {
+        var LA : HTMLInputElement | null = document.querySelector('#l2');
+        LA!.focus()
+      }, 20);
+    }
+  }
+  
+  const handleLinkPreview3 = (event : React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == 'Enter'){
+      console.log(prevRef3.current?.value)
+      var prevy = prevRef3.current?.value
+      setLinkPreviews3(prevRef3.current?.value!)
+      setTimeout(() => {
+        prevRef3!.current!.value = prevy!
+      }, 10);
+      setTimeout(() => {
+        var LA : HTMLInputElement | null = document.querySelector('#l3');
+        LA!.focus()
+      }, 20);
+    }
+  }
+  
+  const handleLinkPreview4 = (event : React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == 'Enter'){
+      console.log(prevRef4.current?.value)
+      var prevy = prevRef4.current?.value
+      setLinkPreviews4(prevRef4.current?.value!)
+      setTimeout(() => {
+        prevRef4!.current!.value = prevy!
+      }, 10);
+      setTimeout(() => {
+        var LA : HTMLInputElement | null = document.querySelector('#l4');
+        LA!.focus()
+      }, 20);
+    }
+  }
+  
+  const handleLinkPreview5 = (event : React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == 'Enter'){
+      console.log(prevRef5.current?.value)
+      var prevy = prevRef5.current?.value
+      setLinkPreviews5(prevRef5.current?.value!)
+      setTimeout(() => {
+        prevRef5!.current!.value = prevy!
+      }, 10);
+      setTimeout(() => {
+        var LA : HTMLInputElement | null = document.querySelector('#l5');
+        LA!.focus()
+      }, 20);
+    }
+  }
     
+
     const UploadImage = () => {
       if (firstNameRef.current?.value == "") {
         return setFirstError(`Can't be empty`);
@@ -174,7 +268,7 @@ export default function Dashboard() {
 
   const [LinkRank, setLinkRank] = useState<number[]>([])
 
-  const [value, setValue] = useState<number[]>([0,0,0,0,0,0]);
+  const [value, setValue] = useState<number[]>([0]);
   const [PH, setPH] = useState<string | undefined>(options[0].placeholder)
 
   function changem(arr : number[],i : number,v : number){
@@ -182,6 +276,7 @@ export default function Dashboard() {
     array2[i] = v-1
     return array2
 }
+
 
   function LinkEntry(props: props) {
   
@@ -196,13 +291,15 @@ export default function Dashboard() {
                 if(props.Rank == 1){
                   let v2 = value
                   v2.shift()
-                  setValue([...v2,0])
+                  setValue([...v2])
                 } else {
-                  let v2 = value.slice(props.Rank-1)
+                  let v2 = value.slice(props.Rank)
                   v2.shift()
-                  setValue([...value.slice(0,props.Rank-1),...v2,0])
+                  setValue([...value.slice(0,props.Rank),...v2])
+                  console.log(value)
                 }
-                console.log(value)
+                console.log(options[value[1]].label)
+
                 setLinkRank(Array.from({length: linkNumber-2}, (_, i) => i + 1))
                 setLinkNumber(linkNumber - 1)
               }} className="btn-3">Remove</button>
@@ -218,9 +315,12 @@ export default function Dashboard() {
           }}
         />
         <label className="plat">Link</label>
-        <input id="Link-input" type="text" placeholder={
+        <input onKeyUp={(e) => props.handlePrev(e)} id={props.id} type="text" placeholder={
           options[value[props.Rank]].placeholder
-          }/>
+          }
+          ref={prevRefs[props.Rank-1]
+          }
+          />
       </div>
     );
   }
@@ -272,6 +372,45 @@ export default function Dashboard() {
             </div>
             <p id="fl-name"> {fullName} </p>
             <p id="emailaddress"> {emailAddress} </p>
+            <div className="colored-prevs">
+              <div className={`linkpreviewsquare ${options[value[1]] && options[value[1]].label}`}>
+                <div className="logoandname">
+                  {value[1]+1 ? <img className="previcon" src={options[value[1]].icon} alt="" /> : <></>}
+                  <p>{options[value[1]] && options[value[1]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>
+              <div className={`linkpreviewsquare ${options[value[2]] && options[value[2]].label}`}>
+                <div className="logoandname">
+                  {value[2]+1 ? <img className="previcon" src={options[value[2]].icon} alt="" /> : <></>}
+                  <p>{options[value[2]] && options[value[2]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>
+              <div className={`linkpreviewsquare ${options[value[3]] && options[value[3]].label}`}>
+                <div className="logoandname">
+                  {value[3]+1 ? <img className="previcon" src={options[value[3]].icon} alt="" /> : <></>}
+                  <p>{options[value[3]] && options[value[3]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>
+              <div className={`linkpreviewsquare ${options[value[4]] && options[value[4]].label}`}>
+                <div className="logoandname">
+                  {value[4]+1 ? <img className="previcon" src={options[value[4]].icon} alt="" /> : <></>}
+                  <p>{options[value[4]] && options[value[4]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>
+              <div className={`linkpreviewsquare ${options[value[5]] && options[value[5]].label}`}>
+                <div className="logoandname">
+                  {value[5]+1 ? <img className="previcon" src={options[value[5]].icon} alt="" /> : <></>}
+                  <p>{options[value[5]] && options[value[5]].label}</p>
+                </div>
+                <img className="arrow" src={Arrow} alt="" />
+              </div>
+            </div>
+
+            
           </div>
         </div>
         <div className="full-op">
@@ -288,6 +427,7 @@ export default function Dashboard() {
                 return
               }
               setIsShownExp(false)
+              setValue([...value,0])
               setLinkRank([...LinkRank,linkNumber]);
               setLinkNumber(linkNumber + 1)}
             } 
@@ -308,9 +448,40 @@ export default function Dashboard() {
               </p>
               </div>
 
-            <div className="links-container">{LinkRank.map(LN => ( <div className="linky">
-              <LinkEntry value={options[5]}  Rank={LN} />
-            </div> ))}</div>
+{/* Entry ---------------------------------------------------------------------------------------- */}
+
+            <div className="links-container">
+              {LinkRank[0] && 
+              <div className='linky'>
+                <LinkEntry handlePrev={handleLinkPreview1} id="l1"
+                Rank={LinkRank[0]} />
+              </div>}
+              {LinkRank[1] && 
+              <div className='linky'>
+                <LinkEntry handlePrev={handleLinkPreview2} id="l2"
+                Rank={LinkRank[1]} />
+              </div>}
+              {LinkRank[2] && 
+              <div className='linky'>
+                <LinkEntry handlePrev={handleLinkPreview3} id="l3"
+                Rank={LinkRank[2]} />
+              </div>}
+              {LinkRank[3] && 
+              <div className='linky'>
+                <LinkEntry handlePrev={handleLinkPreview4} id="l4"
+                Rank={LinkRank[3]} />
+              </div>}
+              {LinkRank[4] && 
+              <div className='linky'>
+                <LinkEntry handlePrev={handleLinkPreview5} id="l5"
+                Rank={LinkRank[4]} />
+              </div>}
+              {/* {LinkRank.map(LN => ( <div className="linky">
+              <LinkEntry onKeyUp={() => (handleLinkPreview(LN-1))}
+              ref={prevRefs[LN-1]}  
+              Rank={LN} />
+            </div> ))} */}
+            </div>
           </div>
           <div className={tabSwitch === 1 ? "full-pro" : "full-pro OFF"}>
             <div>
@@ -367,7 +538,7 @@ export default function Dashboard() {
                   onKeyUp={handleNamePreview}
                   className="prof-input"
                   type="text"
-                  placeholder="e.g. John"
+                  placeholder="e.g. Zakaria"
                   ref={firstNameRef}
                 />
                 <p className="dash-error">{firstError}</p>
@@ -380,7 +551,7 @@ export default function Dashboard() {
                   onKeyUp={handleNamePreview}
                   className="prof-input"
                   type="text"
-                  placeholder="e.g. Appleseed"
+                  placeholder="e.g. Daoudi"
                   ref={lastNameRef}
                 />
                 <p className="dash-error">{lastError}</p>
@@ -393,7 +564,7 @@ export default function Dashboard() {
                   onKeyUp={handleEmailPreview}
                   className="prof-input"
                   type="text"
-                  placeholder="e.g email@example.com"
+                  placeholder="e.g dr.zakaria95@gmail.com"
                   ref={emailRef}
                 />
               </div>

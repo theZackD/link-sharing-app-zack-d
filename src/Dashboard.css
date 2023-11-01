@@ -3,6 +3,7 @@
   min-width: 97vw;
   justify-content: center;
   align-items: center;
+
 }
 
 .tabs {
@@ -325,3 +326,87 @@ input[type=file]{
     display: none;
 }
 
+.colored-prevs {
+    position:absolute;
+    top: 277px;
+    left: 35px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 100;
+
+}
+
+.linkpreviewsquare {
+    width: 237px;
+    height: 44px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.logoandname > p {
+    color: white;
+    font-weight: 700;
+
+}
+
+.logoandname {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.arrow {
+    max-width: 20px;
+}
+
+.previcon {
+    min-width: 30px;
+    filter: brightness(300%);
+}
+
+.YouTube {
+    background-color: red;
+}
+
+.Facebook {
+    background-color: #086eeb;
+}
+
+.GitHub, .CodePen {
+    background-color: black;
+}
+
+.Twitter {
+    background-color: #4297ff;
+}
+
+.Stack {
+    background-color: orange;
+}
+
+.Twitch {
+    background-color: rgb(102, 0, 218);
+}
+
+.FreeCodeCamp {
+    background-color: #001f44;
+}
+
+.Frontend {
+    background-color: rgb(178, 255, 178);
+}
+
+.CodeWars {
+    background-color: rgb(172, 46, 0);
+}
+
+.GitLab {
+    background-color: orangered;
+}
