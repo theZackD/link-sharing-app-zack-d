@@ -31,6 +31,10 @@
     cursor: pointer;
 }
 
+.btn-3:hover {
+    color: rgb(85, 85, 85);
+}
+
 .plat {
     margin-left: 5%;
     margin-top: 0;
@@ -54,4 +58,12 @@
     border-radius: 10px;
     border: rgba(128, 128, 128, 0.411) solid 1px;
     padding-left: 5%;
+}
+
+.links-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 70vh;
+    overflow-y: auto;
 }

@@ -1,13 +1,36 @@
-import { ChangeEvent, JSXElementConstructor, useRef, useState } from "react";
+import { ChangeEvent, JSXElementConstructor, SyntheticEvent, useRef, useState } from "react";
 import LogoLarge from "./assets/images/logo-devlinks-large.svg";
-import LinkEntry from "./LinkEntry";
+// import LinkEntry from "./LinkEntry";
 import PhoneImage from "./assets/images/illustration-phone-mockup.svg";
 import Illustration from "./assets/images/illustration-empty.svg";
 import { ref, uploadBytes } from "firebase/storage";
 import { Storage } from "./firebase";
 import { v4 } from "uuid";
+import "./LinkEntry.css";
+import EqualSign from "./assets/images/icon-drag-and-drop.svg";
+import YTicon from "./assets/images/icon-youtube.svg";
+import FBicon from "./assets/images/icon-facebook.svg";
+import FCCicon from "./assets/images/icon-freecodecamp.svg";
+import FMicon from "./assets/images/icon-frontend-mentor.svg";
+import GHicon from "./assets/images/icon-github.svg";
+import GLicon from "./assets/images/icon-gitlab.svg";
+import CWicon from "./assets/images/icon-codewars.svg";
+import CPicon from "./assets/images/icon-codepen.svg";
+import TWicon from "./assets/images/icon-twitter.svg";
+import TWTCHicon from "./assets/images/icon-twitch.svg";
+import SOicon from "./assets/images/icon-stack-overflow.svg";
+import SelectMenu from "./SelectMenu";
+
+
 // import Upload from "./assets/images/icon-upload-image.svg";
 import "./Dashboard.css";
+
+
+interface props {
+  Rank: number;
+  onClick : (event : SyntheticEvent) => void
+  value : any
+}
 
 function LinkIcon(props: { fill?: string; className: string }) {
   return (
@@ -84,45 +107,110 @@ export default function Dashboard() {
   const [fullName, setFullName] = useState<string>("");
   const [emailAddress, setEmailAdress] = useState<string>("");
 
+  const [isShownExp, setIsShownExp] = useState<Boolean>(true)
+
+  const options = [
+    { label: "Youtube", icon: YTicon, value: 1, 
+    placeholder : "e.g. https://www.youtube.com/zackd" },
+    { label: "Facebook", icon: FBicon, value: 2, 
+    placeholder : "e.g. https://www.facebook.com/zackd" },
+    { label: "FreeCodeCamp", icon: FCCicon, value: 3, 
+    placeholder : "e.g. https://www.freecodecamp.com/zackd"  },
+    { label: "Frontend Mentor", icon: FMicon, value: 4, 
+    placeholder : "e.g. https://www.frontendmentor.io/zackd"  },
+    { label: "Stack Overflow", icon: SOicon, value: 5, 
+    placeholder : "e.g. https://www.stackoverflow.com/zackd"  },
+    { label: "GitHub", icon: GHicon, value: 6,
+    placeholder : "e.g. https://www.github.com/zackd"  },
+    { label: "GitLab", icon: GLicon, value: 7, 
+    placeholder : "e.g. https://www.gitlab.com/zackd"  },
+    { label: "CodeWars", icon: CWicon, value: 8, 
+    placeholder : "e.g. https://www.codewars.com/zackd"  },
+    { label: "Twitter", icon: TWicon, value: 9, 
+    placeholder : "e.g. https://www.twitter.com/zackd"  },
+    { label: "Twitch", icon: TWTCHicon, value: 10, 
+    placeholder : "e.g. https://www.twitch.com/zackd"  },
+    { label: "CodePen", icon: CPicon, value: 11, 
+    placeholder : "e.g. https://www.codepen.com/zackd"  },
+  ];
+
+  
+  const handleNamePreview = () => {
+    return setFullName(
+      `${firstNameRef.current?.value} ${lastNameRef.current?.value}`,
+      );
+    };
+    
+    const handleEmailPreview = () => {
+      return setEmailAdress(`${emailRef.current?.value}`);
+    };
+    
+    const UploadImage = () => {
+      if (firstNameRef.current?.value == "") {
+        return setFirstError(`Can't be empty`);
+      }
+      if (lastNameRef.current?.value == "") {
+        return setFirstError(""), setLastError(`Can't be empty`);
+      }
+      console.log(imageUpload);
+      if (imageUpload == null) {
+        return;
+      }
+      setFirstError("");
+      setLastError("");
+      const imageRef = ref(
+        Storage,
+        `profile_pictures/${imageUpload.name + v4()}`,
+        );
+        uploadBytes(imageRef, imageUpload).then(() => {
+          console.log("image uploaded");
+        });
+      };
+      
+      const ChangeTab = (n: number) => {
+    setTabSwitch(n);
+  };
+  
   const [linkNumber, setLinkNumber] = useState<number>(1);
 
   const [LinkRank, setLinkRank] = useState<number[]>([])
 
-  const handleNamePreview = () => {
-    return setFullName(
-      `${firstNameRef.current?.value} ${lastNameRef.current?.value}`,
+  const [value, setValue] = useState<number[]>([0,0,0,0,0,0]);
+  const [PH, setPH] = useState<string | undefined>(options[0].placeholder)
+
+  function changem(arr : number[],i : number,v : number){
+    let array2 = arr;
+    array2[i] = v-1
+    return array2
+}
+
+  function LinkEntry(props: props) {
+  
+    return (
+      <div className="link-comp-container">
+        <div className="link-header">
+          <div className="fulllinktitle">
+            <img id="link-thingy" src={EqualSign} alt="" />
+            <p className="link-title">Link #{props.Rank}</p>
+          </div>
+          <button onClick={props.onClick} className="btn-3">Remove</button>
+        </div>
+        <label className="plat">Platform</label>
+        <SelectMenu
+          options={options}
+          value={options[value[props.Rank]]}
+          onChange={(o) => {
+              setValue(changem(value, props.Rank, o?.value))
+              setPH(o?.placeholder)
+              console.log(PH)
+          }}
+        />
+        <label className="plat">Link</label>
+        <input id="Link-input" type="text" placeholder={options[value[props.Rank]].placeholder}/>
+      </div>
     );
-  };
-
-  const handleEmailPreview = () => {
-    return setEmailAdress(`${emailRef.current?.value}`);
-  };
-
-  const UploadImage = () => {
-    if (firstNameRef.current?.value == "") {
-      return setFirstError(`Can't be empty`);
-    }
-    if (lastNameRef.current?.value == "") {
-      return setFirstError(""), setLastError(`Can't be empty`);
-    }
-    console.log(imageUpload);
-    if (imageUpload == null) {
-      return;
-    }
-    setFirstError("");
-    setLastError("");
-    const imageRef = ref(
-      Storage,
-      `profile_pictures/${imageUpload.name + v4()}`,
-    );
-    uploadBytes(imageRef, imageUpload).then(() => {
-      console.log("image uploaded");
-    });
-  };
-
-  const ChangeTab = (n: number) => {
-    setTabSwitch(n);
-  };
+  }
+  
 
   return (
     <div className="dash-container">
@@ -136,7 +224,7 @@ export default function Dashboard() {
             <LinkIcon
               fill={tabSwitch === 0 ? "#633CFF" : ""}
               className="svg1 svg-active"
-            />
+              />
             <p>Links</p>
           </div>
           <div
@@ -182,6 +270,10 @@ export default function Dashboard() {
               </p>
             </div>
             <button onClick={() => {
+              if (linkNumber == 6){
+                return
+              }
+              setIsShownExp(false)
               setLinkRank([...LinkRank,linkNumber]);
               setLinkNumber(linkNumber + 1)}
             } 
@@ -190,7 +282,7 @@ export default function Dashboard() {
               + Add new link
             </button>
 
-            {/* <div className="explanation">
+            <div className={isShownExp ? "explanation" : "OFF"}>
               <div className="">
                 <img src={Illustration} alt="" />
               </div>
@@ -200,9 +292,15 @@ export default function Dashboard() {
                 than one link, you can reorder and edit them. We're here to help
                 you share your profiles with everyone!
               </p>
-              </div> */}
+              </div>
 
-            <div className="links-container">{LinkRank.map(LN => ( <LinkEntry Rank={LN} /> ))}</div>
+            <div className="links-container">{LinkRank.map(LN => ( <div className="linky">
+              <LinkEntry value={options[5]} onClick={() => {
+
+                setLinkRank(Array.from({length: linkNumber-2}, (_, i) => i + 1))
+                setLinkNumber(linkNumber - 1)
+              }}  Rank={LN} />
+            </div> ))}</div>
           </div>
           <div className={tabSwitch === 1 ? "full-pro" : "full-pro OFF"}>
             <div>

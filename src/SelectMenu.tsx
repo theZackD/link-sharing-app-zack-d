@@ -23,6 +23,8 @@ export default function SelectMenu({ value, onChange, options} : SelectProps) {
         onChange(option)
     }
 
+    
+
     return (
     <div onBlur={() => setIsOpen(false)} onClick={() => setIsOpen(!isOpen)} tabIndex={0} className={MenuStyle.container}>
         <span className={MenuStyle.value}>
