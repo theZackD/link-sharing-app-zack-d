@@ -121,12 +121,13 @@ export default function Dashboard() {
 
   const [imageUpload, setImageUpload] = useState<File | null>(null);
   const [ProfileImage, setProfileImage] = useState('')
+  
+  const { logout, currentUser } = useAuth()
 
-
-  getDownloadURL(ref(Storage,`profile_picture`))
-    .then(response => {
-      setProfileImage(response)
-    })
+  currentUser &&  getDownloadURL(ref(Storage,`profile_picture_${currentUser.uid}`))
+      .then(response => {
+        setProfileImage(response)
+      })
 
   
 
@@ -318,7 +319,7 @@ export default function Dashboard() {
       setLastError("");
       const imageRef = ref(
         Storage,
-        `profile_picture`,
+        `profile_picture_${currentUser.uid}`,
         );
         uploadBytes(imageRef, imageUpload).then(() => {
           console.log("image uploaded");
@@ -343,7 +344,6 @@ export default function Dashboard() {
     return array2
 }
 
-  const { logout } = useAuth()
   const navigate = useNavigate()
 
   const [LogError, setLogError] = useState('')

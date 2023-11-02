@@ -1,4 +1,4 @@
-import LogoLarge from "./assets/images/Temp-logo-large.svg";
+import LogoLarge from "./assets/images/logo-devlinks-large.svg";
 // import EmailIcon from './assets/images/icon-email.svg'
 import { Link, useNavigate } from "react-router-dom";
 import React, { useState } from "react";
@@ -46,7 +46,7 @@ const Login: React.FC = () => {
       setError("");
       setLoading(true);
       await login(emailRef.current?.value, passRef.current?.value);
-      navigate("/dashboard");
+      navigate("/dash");
     } catch {
       setError("Failed to sign in");
     }
@@ -57,7 +57,7 @@ const Login: React.FC = () => {
   return (
     <div className="container">
       <div className="head">
-        <img src={LogoLarge} alt="" />
+        <img onClick={() => {console.log(currentUser)}} src={LogoLarge} alt="" />
       </div>
       <div className="Log-container">
         <div className="title">

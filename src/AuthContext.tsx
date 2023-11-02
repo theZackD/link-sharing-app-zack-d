@@ -8,7 +8,7 @@ import {
 } from "firebase/auth/cordova";
 import { User } from "@firebase/auth/cordova";
 
-const AuthContext = React.createContext<any | undefined>(undefined);
+export const AuthContext = React.createContext<any | undefined>(undefined);
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -33,7 +33,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }
 
   function login(email: string, password: string) {
+
     return signInWithEmailAndPassword(auth, email, password);
+    
   }
 
   function logout() {
@@ -42,6 +44,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log(user);
       setCurrentUser(user);
       setLoading(false);
     });
