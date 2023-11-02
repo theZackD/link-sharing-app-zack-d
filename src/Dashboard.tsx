@@ -1,9 +1,9 @@
-import { ChangeEvent, JSXElementConstructor, SyntheticEvent, useRef, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import LogoLarge from "./assets/images/logo-devlinks-large.svg";
 // import LinkEntry from "./LinkEntry";
 import PhoneImage from "./assets/images/illustration-phone-mockup.svg";
 import Illustration from "./assets/images/illustration-empty.svg";
-import { ref, uploadBytes, getDownloadURL, getBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { useAuth } from "./AuthContext";
 import { Storage } from "./firebase";
 
