@@ -3,9 +3,10 @@ import LogoLarge from "./assets/images/logo-devlinks-large.svg";
 // import LinkEntry from "./LinkEntry";
 import PhoneImage from "./assets/images/illustration-phone-mockup.svg";
 import Illustration from "./assets/images/illustration-empty.svg";
-import { ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes, getDownloadURL, getBytes } from "firebase/storage";
+import { useAuth } from "./AuthContext";
 import { Storage } from "./firebase";
-import { v4 } from "uuid";
+
 import "./LinkEntry.css";
 import EqualSign from "./assets/images/icon-drag-and-drop.svg";
 import YTicon from "./assets/images/icon-youtube.svg";
@@ -25,8 +26,7 @@ import Arrow from './assets/images/icon-arrow-right.svg'
 
 // import Upload from "./assets/images/icon-upload-image.svg";
 import "./Dashboard.css";
-
-
+import { useNavigate } from "react-router";
 
 interface props {
   Rank: number;
@@ -120,6 +120,17 @@ export default function Dashboard() {
   // }
 
   const [imageUpload, setImageUpload] = useState<File | null>(null);
+  const [ProfileImage, setProfileImage] = useState('')
+
+
+  getDownloadURL(ref(Storage,`profile_picture`))
+    .then(response => {
+      setProfileImage(response)
+    })
+
+  
+
+  
 
   const emailRef = useRef<HTMLInputElement>(null);
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -307,11 +318,12 @@ export default function Dashboard() {
       setLastError("");
       const imageRef = ref(
         Storage,
-        `profile_pictures/${imageUpload.name + v4()}`,
+        `profile_picture`,
         );
         uploadBytes(imageRef, imageUpload).then(() => {
           console.log("image uploaded");
         });
+        getDownloadURL(imageRef).then(response => {setProfileImage(response)})
       };
       
       const ChangeTab = (n: number) => {
@@ -331,6 +343,10 @@ export default function Dashboard() {
     return array2
 }
 
+  const { logout } = useAuth()
+  const navigate = useNavigate()
+
+  const [LogError, setLogError] = useState('')
 
   function LinkEntry(props: props) {
   
@@ -383,6 +399,18 @@ export default function Dashboard() {
   return (
     <>
     <div className={isSharePg ? "OFF" : "dash-container"}>
+      <div className="Logout">
+        <button className="btn-1" style={{'width' : '16ch'}} onClick={async () => {
+          try {
+            await logout()
+            navigate('./../login')
+          } catch {
+            console.log('Failed to logout')
+            setLogError('Oops ! Failed to logout ! Please try again.')
+          }
+        }}>Logout</button>
+        <p style={{'color' : 'red'}}>{LogError}</p>
+      </div>
       <div className="dash-head">
         <img src={LogoLarge} alt="" />
         <div className="tabs">
@@ -416,14 +444,7 @@ export default function Dashboard() {
           <div className="preview-links">
             <img id="Phone" src={PhoneImage} alt="" />
             <div className="pp-container">
-              {imageUpload ? (
-                <img
-                  id="preview-propic"
-                  src={URL.createObjectURL(imageUpload)}
-                />
-              ) : (
-                <img id="pp-preview" className="OFF" src="" alt="" />
-              )}
+              <img id="preview-propic" src={ProfileImage} />
             </div>
             <p id="fl-name"> {fullName} </p>
             <p id="emailaddress"> {emailAddress} </p>
@@ -568,14 +589,7 @@ export default function Dashboard() {
                   >
                     + Upload Image
                   </p>
-                  {imageUpload ? (
-                    <img
-                      id="pp-preview"
-                      src={URL.createObjectURL(imageUpload)}
-                    />
-                  ) : (
-                    <img id="pp-preview" className="OFF" src="" alt="" />
-                  )}
+                  {imageUpload && <img id="pp-preview" src={URL.createObjectURL(imageUpload)}/>}
                 </div>
               </label>
 
@@ -653,47 +667,44 @@ export default function Dashboard() {
                   {value[1]+1 ? <img className="previcon" src={options[value[1]].icon} alt="" /> : <></>}
                   <p>{options[value[1]] && options[value[1]].label}</p>
                 </div>
-                <img className="arrow" src={Arrow} alt="" />
+                <a href={linkPreview1}><img className="arrow" src={Arrow} alt="" /></a>
               </div>)}
               {options[value[2]] && (<div className={`linkpreviewsquare ${options[value[2]] && options[value[2]].label}`}>
                 <div className="logoandname">
                   {value[2]+1 ? <img className="previcon" src={options[value[2]].icon} alt="" /> : <></>}
                   <p>{options[value[2]] && options[value[2]].label}</p>
                 </div>
-                <img className="arrow" src={Arrow} alt="" />
+                <a href={linkPreview2}><img className="arrow" src={Arrow} alt="" /></a>
               </div>)}
               {options[value[3]] && (<div className={`linkpreviewsquare ${options[value[3]] && options[value[3]].label}`}>
                 <div className="logoandname">
                   {value[3]+1 ? <img className="previcon" src={options[value[3]].icon} alt="" /> : <></>}
                   <p>{options[value[3]] && options[value[3]].label}</p>
                 </div>
-                <img className="arrow" src={Arrow} alt="" />
+                <a href={linkPreview3}><img className="arrow" src={Arrow} alt="" /></a>
               </div>)}
               {options[value[4]] && (<div className={`linkpreviewsquare ${options[value[4]] && options[value[4]].label}`}>
                 <div className="logoandname">
                   {value[4]+1 ? <img className="previcon" src={options[value[4]].icon} alt="" /> : <></>}
                   <p>{options[value[4]] && options[value[4]].label}</p>
                 </div>
-                <img className="arrow" src={Arrow} alt="" />
+                <a href={linkPreview4}><img className="arrow" src={Arrow} alt="" /></a>
               </div>)}
               {options[value[5]] && (<div className={`linkpreviewsquare ${options[value[5]] && options[value[5]].label}`}>
                 <div className="logoandname">
                   {value[5]+1 ? <img className="previcon" src={options[value[5]].icon} alt="" /> : <></>}
                   <p>{options[value[5]] && options[value[5]].label}</p>
                 </div>
-                <img className="arrow" src={Arrow} alt="" />
+                <a href={linkPreview5}><img className="arrow" src={Arrow} alt="" /></a>
               </div>)}
             </div>
             <div className="card-cont">
               <div className="pp-container2">
-                {imageUpload ? (
-                  <img
-                    id="preview-propic"
-                    src={URL.createObjectURL(imageUpload)}
-                  />
-                ) : (
-                  <img id="pp-preview" className="OFF" src="" alt="" />
-                )}
+                <img
+                  id="preview-propic"
+                  src={ProfileImage}
+                />
+          
               </div>
               <p id="fl-name2"> {fullName} </p>
               <p id="emailaddress2"> {emailAddress} </p>

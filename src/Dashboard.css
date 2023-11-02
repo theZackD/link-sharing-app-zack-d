@@ -371,6 +371,7 @@ input[type=file]{
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .colored-prevs2 {
@@ -384,6 +385,8 @@ input[type=file]{
     padding-top: 250px;
     top: -200px;
     border-radius: 10px;
+    box-shadow: 0 0 20px;
+    min-width: 320px;
 
 }
 
@@ -395,7 +398,7 @@ input[type=file]{
 
 .pp-container2 {
     position:absolute;
-    left: 46.5%;
+    left: 46.4%;
     top: 20px;
     z-index: 100;
 }
@@ -417,7 +420,15 @@ input[type=file]{
     color: black;
 }
 
+a {
+    display: flex;
+}
 
+.Logout {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+}
 
 
 
